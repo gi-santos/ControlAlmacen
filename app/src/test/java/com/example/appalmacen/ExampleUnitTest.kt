@@ -1,4 +1,4 @@
-package com.proyectopracticas.controlalmacen
+package com.example.appalmacen
 
 import org.junit.Test
 
