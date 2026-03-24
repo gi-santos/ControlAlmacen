@@ -28,4 +28,7 @@ interface UsuarioDAO {
 
     @Query("UPDATE ${Contract.TABLE_USUARIOS} SET ${Contract.UsuarioColumns.HABILITADO} = :habilitado WHERE ${Contract.UsuarioColumns.ID} = :id")
     suspend fun setHabilitado(id: Int, habilitado: Boolean)
+
+    @Query("SELECT * FROM ${Contract.TABLE_USUARIOS} WHERE ${Contract.UsuarioColumns.EMAIL} = :email AND ${Contract.UsuarioColumns.PASSWORD} = :password AND ${Contract.UsuarioColumns.HABILITADO} = 1 LIMIT 1")
+    suspend fun login(email: String, password: String): Usuario?
 }
