@@ -10,7 +10,10 @@ import com.example.appalmacen.model.entities.Usuario
 import com.example.appalmacen.model.repository.UsuarioRepository
 import kotlinx.coroutines.launch
 
-class RegisterActivity : AppCompatActivity() {
+
+// Hay que quitar BaseActivity y volver a poner AppCompativity en donde no queramos
+// que el timer funcione
+class RegisterActivity : BaseActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var usuarioRepository: UsuarioRepository
