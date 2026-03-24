@@ -14,7 +14,7 @@
 
         <!-- Empezamos por la animación (LogoActivity) -->
         <activity
-            android:name=".view.activities.SplashActivity"
+            android:name=".view.activities.LogoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
