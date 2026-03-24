@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppAlmacen">
 
-        <!-- Pantalla de inicio que decide si vas a Login o a Main -->
+        <!-- Empezamos por la animación (LogoActivity) -->
         <activity
             android:name=".view.activities.SplashActivity"
             android:exported="true">
@@ -21,6 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".view.activities.SplashActivity"
+            android:exported="false" />
 
         <activity
             android:name=".view.activities.LoginActivity"
