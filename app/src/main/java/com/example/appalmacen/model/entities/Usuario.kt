@@ -3,19 +3,33 @@ package com.example.appalmacen.model.entities
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.ColumnInfo
+import androidx.room.ForeignKey
 import com.example.appalmacen.model.database.Contract
 
-@Entity(tableName = Contract.TABLE_USUARIOS)
+@Entity(
+    tableName = Contract.TABLE_USUARIOS,
+    foreignKeys = [
+        ForeignKey(
+            entity = Perfil::class,
+            parentColumns = [Contract.PerfilColumns.ID],
+            childColumns = ["perfil_id"],
+            onDelete = ForeignKey.SET_NULL
+        )
+    ]
+)
 data class Usuario(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = Contract.UsuarioColumns.ID)
     val id: Int = 0,
 
+    @ColumnInfo(name = "perfil_id", index = true)
+    val perfilId: Int? = null,
+
     @ColumnInfo(name = Contract.UsuarioColumns.NOMBRE)
     val nombre: String,
 
     @ColumnInfo(name = Contract.UsuarioColumns.FOTO)
-    val foto: String,
+    val foto: String?,
 
     @ColumnInfo(name = Contract.UsuarioColumns.EMAIL)
     val email: String,

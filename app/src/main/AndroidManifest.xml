@@ -11,6 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppAlmacen">
+
+        <!-- Empezamos por la animación (LogoActivity) -->
         <activity
             android:name=".view.activities.LogoActivity"
             android:exported="true">
@@ -21,7 +23,19 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".view.activities.SplashActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".view.activities.LoginActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".view.activities.RegisterActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".view.activities.MainActivity"
             android:exported="false" />
 
     </application>
