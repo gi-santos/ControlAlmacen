@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AppAlmacen</string>
+    <string name="abrir_camara">Abrir Cámara</string>
+    <string name="toque_para_abrir_camara">Toque para abrir cámara</string>
 </resources>

@@ -37,5 +37,12 @@ class MainActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
+
+
+        binding.btnAddProduct.setOnClickListener {
+            val intent = Intent(this, NewProductActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

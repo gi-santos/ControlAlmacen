@@ -8,6 +8,7 @@ android {
     namespace = "com.example.appalmacen"
     compileSdk = 34
 
+
     defaultConfig {
         applicationId = "com.example.appalmacen"
         minSdk = 24
@@ -27,6 +28,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
 }
 
 dependencies {
@@ -34,6 +36,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.constraintlayout)
+    implementation("androidx.activity:activity-ktx:1.8.2")
 
     // Room
     implementation(libs.androidx.room.runtime)

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".model.AlmacenApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -11,6 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppAlmacen">
+
+
 
         <!-- Pantalla de inicio que decide si vas a Login o a Main -->
         <activity
@@ -33,6 +36,13 @@
         <activity
             android:name=".view.activities.MainActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".view.activities.NewProductActivity"
+            android:exported="false"
+            android:label="Añadir Producto" />
+
+
 
     </application>
 
