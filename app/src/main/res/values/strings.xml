@@ -2,4 +2,8 @@
     <string name="app_name">AppAlmacen</string>
     <string name="abrir_camara">Abrir Cámara</string>
     <string name="toque_para_abrir_camara">Toque para abrir cámara</string>
+    <string name="nuevo_usuario">Nuevo Usuario</string>
+    <string name="nombre_del_producto">Nombre del Producto</string>
+    <string name="ej_smartphone_x1_premium">Ej. Smartphone X1 Premium</string>
+    <string name="cantidad">Cantidad</string>
 </resources>

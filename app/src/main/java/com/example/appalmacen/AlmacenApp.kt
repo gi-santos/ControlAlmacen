@@ -10,7 +10,7 @@ class AlmacenApp : Application() {
         DatabaseHelper.getInstance(this)
     }
 
-    // Un repository por cada DAO que necesites
+    // Un repository por cada DAO
     val productoRepository: ProductoRepository by lazy {
         ProductoRepository(database.productoDAO())
     }
