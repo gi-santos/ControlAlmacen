@@ -4,9 +4,12 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import com.example.appalmacen.controller.SesionController
+import com.example.appalmacen.model.database.DatabaseHelper
+import com.example.appalmacen.model.repository.UsuarioRepository
+import com.example.appalmacen.utils.PreferencesManager
 
-//todas las opantallas que funcionen con timer tienen que heredar directamente de esta
-// NN de de AppCompatActivity
+//todas las pantallas que funcionen con timer tienen que heredar directamente de esta
 open class BaseActivity : AppCompatActivity() {
 
     // 10 minutos en milisegundos
@@ -27,10 +30,14 @@ open class BaseActivity : AppCompatActivity() {
         handler.postDelayed(logoutRunnable, logoutTime)
     }
 
-    //Cambiar el MainActivity por  la de seleccionar perfil
     private fun cerrarSesion() {
+        // Limpiar sesión
+        val usuarioRepo = UsuarioRepository(DatabaseHelper.getInstance(this).usuarioDAO())
+        val prefManager = PreferencesManager(this)
+        val sesionController = SesionController(usuarioRepo, prefManager)
+        sesionController.logout()
 
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()

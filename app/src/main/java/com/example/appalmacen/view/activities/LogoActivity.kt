@@ -14,6 +14,14 @@ class LogoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_logo)
 
         val motion = findViewById<MotionLayout>(R.id.splashMotion)
+        
+        // Listener de seguridad por si falla la animación
+        motion.postDelayed({
+            if (!isFinishing) {
+                startActivity(Intent(this@LogoActivity, SplashActivity::class.java))
+                finish()
+            }
+        }, 3500) // Un poco más que la duración de la animación (3000ms)
 
         motion.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {

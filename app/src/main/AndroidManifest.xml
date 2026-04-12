@@ -38,6 +38,11 @@
             android:name=".view.activities.MainActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".view.activities.UsuarioGestionActivity"
+            android:exported="false"
+            android:label="Gestión de Usuarios" />
+
     </application>
 
 </manifest>
