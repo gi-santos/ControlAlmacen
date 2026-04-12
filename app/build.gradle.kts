@@ -37,14 +37,24 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.constraintlayout)
     implementation("androidx.activity:activity-ktx:1.8.2")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 
     // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
 
-    // Coroutines (para usar suspend functions con Room)
+    // CameraX — necesitas los 4
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
+
+    // Coroutines
     implementation(libs.kotlinx.coroutines.android)
+
+    // ListenableFuture para CameraX (quita el duplicado, deja solo esta)
+    implementation("androidx.concurrent:concurrent-futures-ktx:1.2.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

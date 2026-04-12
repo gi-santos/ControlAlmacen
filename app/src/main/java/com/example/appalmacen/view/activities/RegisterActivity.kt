@@ -37,6 +37,7 @@ class RegisterActivity : AppCompatActivity() {
         val email = binding.etRegEmail.text.toString()
         val password = binding.etRegPassword.text.toString()
         val confirmPassword = binding.etRegConfirmPassword.text.toString()
+        
 
         if (nombre.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             Toast.makeText(this, "Por favor, rellena todos los campos", Toast.LENGTH_SHORT).show()

@@ -13,6 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppAlmacen">
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
 
 
         <!-- Pantalla de inicio que decide si vas a Login o a Main -->
@@ -36,6 +46,8 @@
         <activity
             android:name=".view.activities.MainActivity"
             android:exported="false" />
+
+        <activity android:name=".view.activities.SelectUserActivity" />
 
         <activity
             android:name=".view.activities.NewProductActivity"
