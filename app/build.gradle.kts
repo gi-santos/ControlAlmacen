@@ -39,6 +39,14 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.8.2")
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
+    // Lifecycle
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+    // Glide
+    implementation(libs.glide)
+    ksp(libs.glide.compiler)
+
     // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
