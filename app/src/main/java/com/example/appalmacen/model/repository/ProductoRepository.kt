@@ -1,38 +1,31 @@
 package com.example.appalmacen.model.repository
 
-import com.example.appalmacen.model.dao.InteraccionDAO
 import com.example.appalmacen.model.dao.ProductoDAO
-import com.example.appalmacen.model.entities.Interaccion
 import com.example.appalmacen.model.entities.Producto
 import kotlinx.coroutines.flow.Flow
 
-class ProductoRepository(
-    private val productoDAO: ProductoDAO,
-    private val interaccionDAO: InteraccionDAO
-) {
-    val allProductos: Flow<List<Producto>> = productoDAO.getAll()
-    val habilitados: Flow<List<Producto>> = productoDAO.getHabilitados()
+class ProductoRepository(private val productoDAO: ProductoDAO) {
 
-    suspend fun getById(id: Int): Producto? = productoDAO.getById(id)
+    val productosHabilitados: Flow<List<Producto>> = productoDAO.getHabilitados()
+    val todosLosProductos: Flow<List<Producto>> = productoDAO.getAll()
 
-    suspend fun insert(producto: Producto): Long = productoDAO.insert(producto)
+    suspend fun insertar(producto: Producto): Long {
+        return productoDAO.insert(producto)
+    }
 
-    suspend fun update(producto: Producto) = productoDAO.update(producto)
+    suspend fun actualizar(producto: Producto) {
+        productoDAO.update(producto)
+    }
 
-    suspend fun delete(producto: Producto) {
-        interaccionDAO.deleteByProducto(producto.id)
+    suspend fun eliminar(producto: Producto) {
         productoDAO.delete(producto)
     }
 
-    suspend fun registrarInteraccion(usuarioId: Int, productoId: Int) {
-        interaccionDAO.insert(Interaccion(usuarioId = usuarioId, productoId = productoId))
+    suspend fun obtenerPorId(id: Int): Producto? {
+        return productoDAO.getById(id)
     }
 
-    fun getUltimasInteracciones(usuarioId: Int): Flow<List<Producto>> {
-        return interaccionDAO.getUltimasInteracciones(usuarioId)
-    }
-
-    fun searchProductos(query: String): Flow<List<Producto>> {
-        return productoDAO.searchHabilitados(query)
+    suspend fun setHabilitado(id: Int, habilitado: Boolean) {
+        productoDAO.setHabilitado(id, habilitado)
     }
 }

@@ -26,19 +26,14 @@
 
 
         <!-- Pantalla de inicio que decide si vas a Login o a Main -->
-        <!-- Empezamos por la animación (LogoActivity) -->
         <activity
-            android:name=".view.activities.LogoActivity"
+            android:name=".view.activities.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".view.activities.SplashActivity"
-            android:exported="false" />
 
         <activity
             android:name=".view.activities.LoginActivity"
@@ -60,11 +55,6 @@
             android:label="Añadir Producto" />
 
 
-
-        <activity
-            android:name=".view.activities.UsuarioGestionActivity"
-            android:exported="false"
-            android:label="Gestión de Usuarios" />
 
     </application>
 
