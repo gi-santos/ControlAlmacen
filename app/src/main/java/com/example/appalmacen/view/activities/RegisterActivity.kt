@@ -1,5 +1,6 @@
 package com.example.appalmacen.view.activities
 
+import android.content.Intent // <--- Asegúrate de tener esta importación
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -33,11 +34,10 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registrarUsuario() {
-        val nombre = binding.etRegNombre.text.toString()
-        val email = binding.etRegEmail.text.toString()
+        val nombre = binding.etRegNombre.text.toString().trim()
+        val email = binding.etRegEmail.text.toString().trim()
         val password = binding.etRegPassword.text.toString()
         val confirmPassword = binding.etRegConfirmPassword.text.toString()
-        
 
         if (nombre.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             Toast.makeText(this, "Por favor, rellena todos los campos", Toast.LENGTH_SHORT).show()
@@ -55,13 +55,20 @@ class RegisterActivity : AppCompatActivity() {
                 email = email,
                 password = password,
                 foto = null,
-                esAdmin = false // Por defecto los registrados no son admin
+                esAdmin = true
             )
 
             try {
                 usuarioRepository.insert(nuevoUsuario)
                 Toast.makeText(this@RegisterActivity, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show()
-                finish() // Volver al login
+
+                // --- CAMBIO AQUÍ: Navegar a SelectUserActivity ---
+                val intent = Intent(this@RegisterActivity, SelectUserActivity::class.java)
+                startActivity(intent)
+
+                // Opcional: cerramos la pantalla de registro para que no pueda volver atrás con el botón físico
+                finish()
+
             } catch (e: Exception) {
                 Toast.makeText(this@RegisterActivity, "Error al registrar: ${e.message}", Toast.LENGTH_SHORT).show()
             }

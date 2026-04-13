@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/bg_item_producto">
+
+    <!-- Imagen producto -->
+    <ImageView
+        android:id="@+id/ivProducto"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:background="@drawable/bg_imagen_producto"
+        android:scaleType="centerCrop"
+        android:contentDescription="Imagen producto" />
+
+    <!-- Nombre y SKU -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="12dp">
+
+        <TextView
+            android:id="@+id/tvNombreProducto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#1A1A2E"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/tvSkuProducto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:textColor="#AAAAAA"
+            android:layout_marginTop="2dp" />
+
+    </LinearLayout>
+
+    <!-- Controles stock -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginStart="8dp">
+
+        <ImageButton
+            android:id="@+id/btnMenos"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_minus"
+            android:background="@drawable/bg_btn_stock_menos"
+            android:contentDescription="Reducir stock"
+            android:padding="12dp" />
+
+        <TextView
+            android:id="@+id/tvCantidad"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#1A1A2E" />
+
+        <ImageButton
+            android:id="@+id/btnMas"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_plus"
+            android:background="@drawable/bg_btn_stock_mas"
+            android:contentDescription="Aumentar stock"
+            android:padding="12dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

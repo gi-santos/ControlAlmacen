@@ -13,9 +13,11 @@ import com.example.appalmacen.model.entities.*
         Producto::class,
         Albaran::class,
         Perfil::class,
-        Proveedor::class
+        Proveedor::class,
+        UsuarioProductoInteraccion::class
+
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class DatabaseHelper : RoomDatabase() {
@@ -25,6 +27,10 @@ abstract class DatabaseHelper : RoomDatabase() {
     abstract fun albaranDAO(): AlbaranDAO
     abstract fun perfilDAO(): PerfilDAO
     abstract fun proveedorDAO(): ProveedorDAO
+
+    abstract fun interaccionDAO(): InteraccionDAO
+
+
 
     companion object {
         @Volatile

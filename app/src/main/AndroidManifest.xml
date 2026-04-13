@@ -27,7 +27,7 @@
 
         <!-- Pantalla de inicio que decide si vas a Login o a Main -->
         <activity
-            android:name=".view.activities.SplashActivity"
+            android:name=".view.activities.LogoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +35,9 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".view.activities.MainActivity"
+            android:exported="false" />
         <activity
             android:name=".view.activities.LoginActivity"
             android:exported="false" />
@@ -44,7 +47,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".view.activities.MainActivity"
+            android:name=".MainActivity"
             android:exported="false" />
 
         <activity android:name=".view.activities.SelectUserActivity" />

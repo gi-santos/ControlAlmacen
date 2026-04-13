@@ -12,7 +12,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Cabecera -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +37,6 @@
                 android:layout_marginStart="10dp" />
         </LinearLayout>
 
-        <!-- Card principal -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,7 +51,6 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Nombre -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -86,7 +83,6 @@
                         android:textColor="#1A1A2E" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Cantidad -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -172,7 +168,6 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- Estado (Habilitado) -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -209,7 +204,6 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Card imagen -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -238,7 +232,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <!-- Preview imagen -->
                     <FrameLayout
                         android:layout_width="0dp"
                         android:layout_height="100dp"
@@ -281,7 +274,6 @@
                         </LinearLayout>
                     </FrameLayout>
 
-                    <!-- Botón abrir cámara -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnAbrirCamara"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -303,22 +295,29 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Botón guardar -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGuardar"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:text="Guardar Producto"
+            android:text="@string/guardar_producto"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
             app:backgroundTint="#2ECC71"
             app:cornerRadius="12dp"
-            app:iconTint="#FFFFFF"
-            app:iconGravity="textStart"
+            android:layout_marginBottom="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancelarProducto"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="@string/cancelar_producto"
+            android:textSize="15sp"
+            android:textColor="#E74C3C"
+            app:rippleColor="#1AE74C3C"
             android:layout_marginBottom="16dp" />
 
-        <!-- ProgressBar (oculta por defecto) -->
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"

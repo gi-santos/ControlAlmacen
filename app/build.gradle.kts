@@ -1,3 +1,5 @@
+
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -44,7 +46,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
 
-    // CameraX — necesitas los 4
+    // CameraX
     implementation(libs.androidx.camera.core)
     implementation(libs.androidx.camera.camera2)
     implementation(libs.androidx.camera.lifecycle)
@@ -53,7 +55,14 @@ dependencies {
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
 
-    // ListenableFuture para CameraX (quita el duplicado, deja solo esta)
+
+    // Lifecycle MVVM
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.lifecycle.livedata)
+    implementation(libs.lifecycle.runtime)
+    implementation(libs.activity.ktx)
+
+    // ListenableFuture para CameraX
     implementation("androidx.concurrent:concurrent-futures-ktx:1.2.0")
 
     testImplementation(libs.junit)

@@ -1,5 +1,6 @@
 package com.example.appalmacen.view.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -45,6 +46,14 @@ class NewProductActivity : AppCompatActivity() {
         // Botón guardar
         binding.btnGuardar.setOnClickListener {
             validarYGuardar()
+        }
+
+        binding.btnCancelarProducto.setOnClickListener {
+            val intent = Intent(this, SelectProductActivity::class.java)
+            // Añadimos flags para evitar crear múltiples instancias si ya existe
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
+            finish() // Cerramos la pantalla actual
         }
     }
 

@@ -21,7 +21,7 @@ import com.example.appalmacen.viewmodel.UsuarioViewModel
 import com.example.appalmacen.viewmodel.usuario.RegisterViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class RegisterActivity : AppCompatActivity() {
+class NewUserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUsuarioBinding
     private lateinit var viewModel: UsuarioViewModel

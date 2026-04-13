@@ -1,31 +1,43 @@
 package com.example.appalmacen.model.repository
 
+import com.example.appalmacen.model.dao.InteraccionDAO
 import com.example.appalmacen.model.dao.ProductoDAO
 import com.example.appalmacen.model.entities.Producto
+import com.example.appalmacen.model.entities.UsuarioProductoInteraccion
 import kotlinx.coroutines.flow.Flow
 
-class ProductoRepository(private val productoDAO: ProductoDAO) {
+class ProductoRepository(
+    private val productoDAO: ProductoDAO,
+    private val interaccionDAO: InteraccionDAO
+) {
+    fun getHabilitados(): Flow<List<Producto>> = productoDAO.getHabilitados()
 
-    val productosHabilitados: Flow<List<Producto>> = productoDAO.getHabilitados()
-    val todosLosProductos: Flow<List<Producto>> = productoDAO.getAll()
+    fun buscar(query: String): Flow<List<Producto>> = productoDAO.buscar(query)
 
-    suspend fun insertar(producto: Producto): Long {
-        return productoDAO.insert(producto)
-    }
+    suspend fun actualizarCantidad(
+        usuarioId: Int,
+        producto: Producto,
+        nuevaCantidad: Int
+    ) {
+        val timestamp = System.currentTimeMillis()
 
-    suspend fun actualizar(producto: Producto) {
-        productoDAO.update(producto)
-    }
+        // 1. Actualizar cantidad y fecha en tabla productos
+        productoDAO.actualizarCantidad(
+            id = producto.id,
+            nuevaCantidad = nuevaCantidad,
+            timestamp = timestamp
+        )
 
-    suspend fun eliminar(producto: Producto) {
-        productoDAO.delete(producto)
-    }
-
-    suspend fun obtenerPorId(id: Int): Producto? {
-        return productoDAO.getById(id)
-    }
-
-    suspend fun setHabilitado(id: Int, habilitado: Boolean) {
-        productoDAO.setHabilitado(id, habilitado)
+        // 2. Registrar interacción
+        interaccionDAO.insert(
+            UsuarioProductoInteraccion(
+                usuarioId = usuarioId,
+                productoId = producto.id,
+                cantidadAnterior = producto.cantidad,
+                cantidadNueva = nuevaCantidad,
+                tipoAccion = if (nuevaCantidad > producto.cantidad) "SUMA" else "RESTA",
+                timestamp = timestamp
+            )
+        )
     }
 }

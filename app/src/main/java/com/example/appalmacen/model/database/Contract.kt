@@ -9,6 +9,8 @@ object Contract {
     const val TABLE_PERFILES = "perfiles"
     const val TABLE_PROVEEDORES = "proveedores"
 
+    const val TABLE_INTERACCIONES = "usuario_producto_interaccion"
+
     // Columnas Usuario
     object UsuarioColumns {
         const val ID = "id"
@@ -57,5 +59,15 @@ object Contract {
         const val CIF = "cif"
         const val TELEFONO = "telefono"
         const val EMAIL = "email"
+    }
+
+    object InteraccionColumns {
+        const val ID = "id"
+        const val USUARIO_ID = "usuario_id"
+        const val PRODUCTO_ID = "producto_id"
+        const val CANTIDAD_ANTERIOR = "cantidad_anterior"
+        const val CANTIDAD_NUEVA = "cantidad_nueva"
+        const val TIPO_ACCION = "tipo_accion"
+        const val TIMESTAMP = "timestamp"
     }
 }

@@ -1,5 +1,6 @@
 package com.example.appalmacen.view.adapters
 
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,8 +33,13 @@ class UsuarioSelectorAdapter(
         holder.tvNombre.text = usuario.nombre
         holder.tvRol.text = if (usuario.esAdmin) "Administrador" else "Empleado"
 
-        if (usuario.foto != null) {
-            holder.civFoto.setImageBitmap(usuario.foto)
+        if (!usuario.foto.isNullOrEmpty()) {
+            val bitmap = BitmapFactory.decodeFile(usuario.foto)
+            if (bitmap != null) {
+                holder.civFoto.setImageBitmap(bitmap)
+            } else {
+                holder.civFoto.setImageResource(R.drawable.ic_person)
+            }
         } else {
             holder.civFoto.setImageResource(R.drawable.ic_person)
         }

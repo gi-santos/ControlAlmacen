@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.example.appalmacen.R
 import com.example.appalmacen.MainActivity // Importante si están en carpetas distintas
+import kotlinx.coroutines.selects.SelectClause
 
 class LogoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +21,7 @@ class LogoActivity : AppCompatActivity() {
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 // Cuando la animación de 3 segundos termina:
                 if (currentId == R.id.end) {
-                    startActivity(Intent(this@LogoActivity, MainActivity::class.java))
+                    startActivity(Intent(this@LogoActivity, RegisterActivity::class.java))
                     finish()
                 }
             }
