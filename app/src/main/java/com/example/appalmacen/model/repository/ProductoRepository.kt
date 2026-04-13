@@ -35,4 +35,8 @@ class ProductoRepository(
     fun searchProductos(query: String): Flow<List<Producto>> {
         return productoDAO.searchHabilitados(query)
     }
+
+    suspend fun getByNombre(nombre: String): Producto? {
+        return productoDAO.getByNombre(nombre)
+    }
 }

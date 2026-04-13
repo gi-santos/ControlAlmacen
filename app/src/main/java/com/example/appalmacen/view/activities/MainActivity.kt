@@ -47,10 +47,15 @@ class MainActivity : AppCompatActivity() {
         // Saludo personalizado y carga inicial
         SesionController.usuarioActivo?.let { usuario ->
             binding.tvWelcome.text = "¡Hola, ${usuario.nombre}!"
+            binding.fabAddProducto.visibility = View.VISIBLE
             if (usuario.esAdmin) {
                 binding.btnGestionUsuarios.visibility = View.VISIBLE
             }
             cargarInteraccionesRecientes(usuario.id)
+        }
+
+        binding.fabAddProducto.setOnClickListener {
+            startActivity(Intent(this, ProductoGestionActivity::class.java))
         }
 
         binding.btnGestionUsuarios.setOnClickListener {

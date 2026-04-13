@@ -51,6 +51,15 @@
             android:background="@android:drawable/presence_online"
             android:layout_marginEnd="8dp"/>
 
+        <ImageView
+            android:id="@+id/ivAlert"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:src="@android:drawable/stat_sys_warning"
+            android:visibility="gone"
+            app:tint="#F44336" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -26,9 +26,11 @@ class ProductoAdapter(
             if (producto.cantidad <= producto.cantidadMinima) {
                 binding.tvProductoCantidad.setTextColor(Color.RED)
                 binding.statusIndicator.setBackgroundColor(Color.RED)
+                binding.ivAlert.visibility = View.VISIBLE
             } else {
                 binding.tvProductoCantidad.setTextColor(Color.GRAY)
                 binding.statusIndicator.setBackgroundColor(Color.GREEN)
+                binding.ivAlert.visibility = View.GONE
             }
 
             Glide.with(binding.root)

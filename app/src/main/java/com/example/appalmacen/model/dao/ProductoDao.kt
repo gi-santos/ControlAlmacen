@@ -31,4 +31,7 @@ interface ProductoDAO {
 
     @Query("SELECT * FROM ${Contract.TABLE_PRODUCTOS} WHERE ${Contract.ProductoColumns.NOMBRE} LIKE '%' || :query || '%' AND ${Contract.ProductoColumns.HABILITADO} = 1")
     fun searchHabilitados(query: String): Flow<List<Producto>>
+
+    @Query("SELECT * FROM ${Contract.TABLE_PRODUCTOS} WHERE ${Contract.ProductoColumns.NOMBRE} = :nombre LIMIT 1")
+    suspend fun getByNombre(nombre: String): Producto?
 }
