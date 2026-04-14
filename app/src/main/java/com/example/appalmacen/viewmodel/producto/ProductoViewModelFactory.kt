@@ -2,13 +2,16 @@ package com.example.appalmacen.viewmodel.producto
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.appalmacen.model.dao.ProductoDAO
+import com.example.appalmacen.model.repository.ProductoRepository
 
-class ProductoViewModelFactory(private val dao: ProductoDAO) : ViewModelProvider.Factory {
+class ProductoViewModelFactory(
+    private val repository: ProductoRepository,
+    private val usuarioId: Int
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ProductoViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return ProductoViewModel(dao) as T
+            return ProductoViewModel(repository, usuarioId) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

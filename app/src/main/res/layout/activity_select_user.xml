@@ -58,6 +58,21 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNuevoUsuario"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="8dp"
+            android:text="@string/new_user"
+            android:textColor="#2ECC71"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:icon="@android:drawable/ic_input_add"
+            app:iconTint="#2ECC71"
+            app:rippleColor="#E8F5E9" />
+
         <!-- Card con la lista de usuarios -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

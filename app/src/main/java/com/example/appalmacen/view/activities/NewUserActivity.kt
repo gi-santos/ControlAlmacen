@@ -12,8 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.appalmacen.R
-import com.example.appalmacen.databinding.ActivityRegisterBinding
-import com.example.appalmacen.databinding.ActivityUsuarioBinding
+import com.example.appalmacen.databinding.ActivityNewUserBinding
 import com.example.appalmacen.databinding.BottomSheetCamaraBinding
 import com.example.appalmacen.model.database.DatabaseHelper
 import com.example.appalmacen.model.repository.UsuarioRepository
@@ -23,10 +22,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class NewUserActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityUsuarioBinding
+    private lateinit var binding: ActivityNewUserBinding
     private lateinit var viewModel: UsuarioViewModel
 
-    // BottomSheet de cámara (lo reutilizamos si ya está abierto)
     private var bottomSheetDialog: BottomSheetDialog? = null
 
     private val cameraPermissionLauncher =
@@ -37,7 +35,7 @@ class NewUserActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityUsuarioBinding.inflate(layoutInflater)
+        binding = ActivityNewUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val db         = DatabaseHelper.getInstance(this)
@@ -163,9 +161,9 @@ class NewUserActivity : AppCompatActivity() {
         // Iniciar cámara delantera en el PreviewView del BottomSheet
         // Usamos 'this@RegisterActivity' como LifecycleOwner → correcto
         viewModel.iniciarCamara(
-            context       = this,
-            lifecycleOwner = this,   // Activity es LifecycleOwner
-            previewView   = sheetBinding.previewView
+            context        = this,
+            lifecycleOwner = this@NewUserActivity,
+            previewView    = sheetBinding.previewView
         )
 
         sheetBinding.btnCapturar.setOnClickListener {

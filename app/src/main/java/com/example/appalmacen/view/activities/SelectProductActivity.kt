@@ -1,4 +1,4 @@
-package com.example.appalmacen.ui
+package com.example.appalmacen.view.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appalmacen.databinding.ActivitySelectProductBinding
 import com.example.appalmacen.model.database.DatabaseHelper
 import com.example.appalmacen.model.repository.ProductoRepository
-import com.example.appalmacen.view.activities.SelectUserActivity
+import com.example.appalmacen.utils.PreferencesManager
 import com.example.appalmacen.view.adapters.ProductoAdapter
 import com.example.appalmacen.viewmodel.producto.ProductoViewModel
 import kotlinx.coroutines.launch
@@ -24,7 +24,7 @@ class SelectProductActivity : AppCompatActivity() {
     private lateinit var adapter: ProductoAdapter
 
     private val usuarioId: Int by lazy {
-        intent.getIntExtra("USUARIO_ID", -1)
+        intent.getIntExtra("user_id", -1)
     }
 
     private val viewModel: ProductoViewModel by viewModels {
@@ -83,9 +83,12 @@ class SelectProductActivity : AppCompatActivity() {
                 .setTitle("Cerrar sesión")
                 .setMessage("¿Quieres terminar la jornada?")
                 .setPositiveButton("Salir") { _, _ ->
-                    getSharedPreferences("sesion", MODE_PRIVATE)
-                        .edit().clear().apply()
-                    startActivity(Intent(this, SelectUserActivity::class.java))
+                    // Usamos tu clase en lugar de SharedPreferences manual
+                    val prefManager = PreferencesManager(this)
+                    prefManager.clearSession()
+
+                    val intent = Intent(this, SelectUserActivity::class.java)
+                    startActivity(intent)
                     finishAffinity()
                 }
                 .setNegativeButton("Cancelar", null)

@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
             val exito = sesionController.login(email, password)
             if (exito) {
                 // Ir a la pantalla principal
-                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                val intent = Intent(this@LoginActivity, SelectUserActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {

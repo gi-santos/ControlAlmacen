@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name=".model.AlmacenApp"
         android:allowBackup="true"
@@ -48,6 +54,14 @@
 
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".view.activities.NewUserActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".view.activities.SelectProductActivity"
             android:exported="false" />
 
         <activity android:name=".view.activities.SelectUserActivity" />

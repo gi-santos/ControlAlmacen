@@ -29,6 +29,9 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.tvBackToLogin.setOnClickListener {
+            val intent = Intent(this, SelectUserActivity::class.java)
+            startActivity(intent)
+
             finish()
         }
     }
