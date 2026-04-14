@@ -3,56 +3,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="32dp"
+    android:padding="16dp"
     android:background="#F5F5F5">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="AppAlmacen"
-        android:textSize="32sp"
+        android:text="Seleccione su usuario"
+        android:textSize="24sp"
         android:textStyle="bold"
+        android:gravity="center"
         android:textColor="#2196F3"
-        android:layout_marginBottom="48dp"/>
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="24dp"/>
 
-    <EditText
-        android:id="@+id/etEmail"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvUsuarios"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp"/>
+
+    <!-- Seccion oculta para login de Admin (se muestra al pulsar un admin) -->
+    <LinearLayout
+        android:id="@+id/layoutAdminPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Correo electrónico"
-        android:inputType="textEmailAddress"
-        android:layout_marginBottom="16dp"
-        android:padding="12dp"
-        android:background="@android:drawable/editbox_background"/>
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:padding="16dp"
+        android:background="@android:color/white"
+        android:elevation="8dp"
+        android:layout_marginTop="8dp">
 
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        android:layout_marginBottom="32dp"
-        android:padding="12dp"
-        android:background="@android:drawable/editbox_background"/>
+        <TextView
+            android:id="@+id/tvAdminSelected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Admin: Introduzca contraseña"
+            android:layout_marginBottom="8dp"/>
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ENTRAR"
-        android:backgroundTint="#2196F3"
-        android:textColor="#FFFFFF"
-        android:padding="12dp"
-        android:layout_marginBottom="16dp"/>
+        <EditText
+            android:id="@+id/etAdminPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contraseña"
+            android:inputType="textPassword"
+            android:layout_marginBottom="16dp"/>
 
-    <TextView
-        android:id="@+id/tvGoToRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="¿No tienes cuenta? Regístrate"
-        android:textColor="#2196F3"
-        android:textSize="16sp"
-        android:padding="8dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnCancelAdmin"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cancelar" />
+
+            <Button
+                android:id="@+id/btnConfirmAdmin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Entrar"
+                android:backgroundTint="#2196F3"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

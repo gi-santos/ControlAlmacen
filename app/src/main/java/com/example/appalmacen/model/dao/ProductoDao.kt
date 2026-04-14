@@ -28,4 +28,10 @@ interface ProductoDAO {
 
     @Query("UPDATE ${Contract.TABLE_PRODUCTOS} SET ${Contract.ProductoColumns.HABILITADO} = :habilitado WHERE ${Contract.ProductoColumns.ID} = :id")
     suspend fun setHabilitado(id: Int, habilitado: Boolean)
+
+    @Query("SELECT * FROM ${Contract.TABLE_PRODUCTOS} WHERE ${Contract.ProductoColumns.NOMBRE} LIKE '%' || :query || '%' AND ${Contract.ProductoColumns.HABILITADO} = 1")
+    fun searchHabilitados(query: String): Flow<List<Producto>>
+
+    @Query("SELECT * FROM ${Contract.TABLE_PRODUCTOS} WHERE ${Contract.ProductoColumns.NOMBRE} = :nombre LIMIT 1")
+    suspend fun getByNombre(nombre: String): Producto?
 }

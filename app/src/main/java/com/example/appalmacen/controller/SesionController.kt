@@ -18,12 +18,21 @@ class SesionController(
     suspend fun login(email: String, password: String): Boolean {
         val usuario = usuarioRepository.login(email, password)
         return if (usuario != null) {
-            usuarioActivo = usuario
-            preferencesManager.saveUserSession(usuario.id)
+            iniciarSesion(usuario)
             true
         } else {
             false
         }
+    }
+
+    // Login directo para usuarios sin contraseña
+    fun loginDirecto(usuario: Usuario) {
+        iniciarSesion(usuario)
+    }
+
+    private fun iniciarSesion(usuario: Usuario) {
+        usuarioActivo = usuario
+        preferencesManager.saveUserSession(usuario.id)
     }
 
     // Cerrar sesión
