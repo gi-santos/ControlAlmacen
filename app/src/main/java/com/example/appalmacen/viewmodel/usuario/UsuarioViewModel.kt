@@ -10,7 +10,7 @@ import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
 import com.example.appalmacen.model.entities.Usuario
-import com.example.appalmacen.model.repository.UsuarioRepository
+import com.example.appalmacen.data.repository.UsuarioRepository
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
@@ -126,11 +126,11 @@ class UsuarioViewModel(
     fun registrarUsuario(
         nombre: String,
         email: String,
-        password: String,
+        password: String?,
         esAdmin: Boolean,
         habilitado: Boolean
     ) {
-        if (nombre.isBlank() || email.isBlank() || password.isBlank()) {
+        if (nombre.isBlank() || email.isBlank()) {
             _registerState.value = RegisterState.Error("Por favor, rellena todos los campos")
             return
         }

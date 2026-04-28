@@ -3,7 +3,7 @@ package com.example.appalmacen.model.entities
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.ColumnInfo
-import com.example.appalmacen.model.database.Contract
+import com.example.appalmacen.data.database.Contract
 
 @Entity(tableName = Contract.TABLE_PRODUCTOS)
 data class Producto(

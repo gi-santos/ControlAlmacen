@@ -2,7 +2,7 @@ package com.example.appalmacen.viewmodel.usuario
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.appalmacen.model.repository.UsuarioRepository
+import com.example.appalmacen.data.repository.UsuarioRepository
 import com.example.appalmacen.viewmodel.UsuarioViewModel
 
 class RegisterViewModelFactory(

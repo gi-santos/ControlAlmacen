@@ -1,7 +1,7 @@
 package com.example.appalmacen.controller
 
 import com.example.appalmacen.model.entities.Usuario
-import com.example.appalmacen.model.repository.UsuarioRepository
+import com.example.appalmacen.data.repository.UsuarioRepository
 import com.example.appalmacen.utils.PreferencesManager
 
 class SesionController(

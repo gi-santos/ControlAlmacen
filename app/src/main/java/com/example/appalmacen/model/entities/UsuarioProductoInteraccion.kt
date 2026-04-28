@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.example.appalmacen.model.database.Contract
+import com.example.appalmacen.data.database.Contract
 
 @Entity(
     tableName = Contract.TABLE_INTERACCIONES,

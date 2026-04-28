@@ -33,7 +33,7 @@
 
         <!-- Pantalla de inicio que decide si vas a Login o a Main -->
         <activity
-            android:name=".view.activities.LogoActivity"
+            android:name=".ui.activities.LogoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,14 +42,14 @@
         </activity>
 
         <activity
-            android:name=".view.activities.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activities.LoginActivity"
+            android:name=".ui.activities.LoginActivity"
             android:exported="false" />
 
         <activity
-            android:name=".view.activities.RegisterActivity"
+            android:name=".ui.activities.RegisterActivity"
             android:exported="false" />
 
         <activity
@@ -57,17 +57,17 @@
             android:exported="false" />
 
         <activity
-            android:name=".view.activities.NewUserActivity"
+            android:name=".ui.activities.NewUserActivity"
             android:exported="false" />
 
         <activity
-            android:name=".view.activities.SelectProductActivity"
+            android:name=".ui.activities.SelectProductActivity"
             android:exported="false" />
 
-        <activity android:name=".view.activities.SelectUserActivity" />
+        <activity android:name=".ui.activities.SelectUserActivity" />
 
         <activity
-            android:name=".view.activities.NewProductActivity"
+            android:name=".ui.activities.NewProductActivity"
             android:exported="false"
             android:label="Añadir Producto" />
 

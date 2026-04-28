@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.ColumnInfo
 import androidx.room.ForeignKey
-import com.example.appalmacen.model.database.Contract
+import com.example.appalmacen.data.database.Contract
 
 @Entity(
     tableName = Contract.TABLE_USUARIOS,
@@ -35,7 +35,7 @@ data class Usuario(
     val email: String,
 
     @ColumnInfo(name = Contract.UsuarioColumns.PASSWORD)
-    val password: String,
+    val password: String? = null,
 
     @ColumnInfo(name = Contract.UsuarioColumns.ES_ADMIN)
     val esAdmin: Boolean = false,

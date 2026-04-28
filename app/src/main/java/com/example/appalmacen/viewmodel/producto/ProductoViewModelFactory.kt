@@ -2,7 +2,7 @@ package com.example.appalmacen.viewmodel.producto
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.appalmacen.model.repository.ProductoRepository
+import com.example.appalmacen.data.repository.ProductoRepository
 
 class ProductoViewModelFactory(
     private val repository: ProductoRepository,

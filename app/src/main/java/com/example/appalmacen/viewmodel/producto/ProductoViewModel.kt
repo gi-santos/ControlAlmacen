@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.appalmacen.model.entities.Producto
-import com.example.appalmacen.model.repository.ProductoRepository
+import com.example.appalmacen.data.repository.ProductoRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
@@ -56,6 +56,10 @@ class ProductoViewModel(
     }
 
     // Mantener función existente para insertar productos nuevos
+    // Agrega este Flow para eventos de un solo uso
+    private val _eventos = MutableSharedFlow<Unit>()
+    val eventos = _eventos.asSharedFlow()
+
     fun insertarProducto(nombre: String, cantidad: Int, cantidadMinima: Int, imagen: String?) {
         val nuevoProducto = Producto(
             nombre = nombre,
@@ -65,7 +69,10 @@ class ProductoViewModel(
             fechaUltimaInteraccion = System.currentTimeMillis()
         )
         viewModelScope.launch {
-            repository.getHabilitados() // acceso al dao a través del repo
+            // CORRECCIÓN: Llamar al insert del repositorio
+            repository.insertar(nuevoProducto)
+            // Avisar que terminamos
+            _eventos.emit(Unit)
         }
     }
 

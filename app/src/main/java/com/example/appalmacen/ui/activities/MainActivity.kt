@@ -1,4 +1,4 @@
-package com.example.appalmacen
+package com.example.appalmacen.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,6 @@ import com.example.appalmacen.databinding.ActivityMainBinding
 import com.example.appalmacen.data.database.DatabaseHelper
 import com.example.appalmacen.data.repository.UsuarioRepository
 import com.example.appalmacen.utils.PreferencesManager
-import com.example.appalmacen.ui.activities.LoginActivity
-import com.example.appalmacen.ui.activities.NewProductActivity
 
 class MainActivity : AppCompatActivity() {
 
