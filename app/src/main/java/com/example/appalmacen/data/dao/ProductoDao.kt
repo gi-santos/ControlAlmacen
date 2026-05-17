@@ -46,4 +46,13 @@ interface ProductoDAO {
     ORDER BY ${Contract.ProductoColumns.NOMBRE} ASC
 """)
     fun buscar(query: String): Flow<List<Producto>>
+
+    @Query("""
+    SELECT DISTINCT p.* FROM ${Contract.TABLE_PRODUCTOS} p
+    INNER JOIN ${Contract.TABLE_INTERACCIONES} i ON p.${Contract.ProductoColumns.ID} = i.${Contract.InteraccionColumns.PRODUCTO_ID}
+    WHERE i.${Contract.InteraccionColumns.USUARIO_ID} = :usuarioId
+    ORDER BY i.${Contract.InteraccionColumns.TIMESTAMP} DESC
+    LIMIT 10
+""")
+    fun getProductosRecientesPorUsuario(usuarioId: Int): Flow<List<Producto>>
 }

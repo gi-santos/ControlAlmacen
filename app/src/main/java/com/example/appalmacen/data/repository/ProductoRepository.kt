@@ -47,4 +47,9 @@ class ProductoRepository(
     suspend fun insertar(producto: Producto) {
         productoDAO.insert(producto)
     }
+
+    fun getProductosRecientesPorUsuario(usuarioId: Int): Flow<List<Producto>> {
+
+        return productoDAO.getProductosRecientesPorUsuario(usuarioId)
+    }
 }

@@ -40,6 +40,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation("androidx.activity:activity-ktx:1.8.2")
     implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("io.coil-kt:coil:2.6.0")
 
     // Room
     implementation(libs.androidx.room.runtime)

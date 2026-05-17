@@ -26,4 +26,6 @@ interface InteraccionDAO {
         ORDER BY ${Contract.InteraccionColumns.TIMESTAMP} DESC
     """)
     fun getByProducto(productoId: Int): Flow<List<UsuarioProductoInteraccion>>
+
+
 }

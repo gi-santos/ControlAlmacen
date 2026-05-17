@@ -97,7 +97,7 @@ class NewUserActivity : AppCompatActivity() {
             val nombre = binding.etNombreUsuario.text.toString().trim()
             val email = binding.etEmail.text.toString().trim()
 
-            if (validarCampos(nombre, email)) { // <--- Usas la función limpia
+            if (validarCampos(nombre, email)) {
                 viewModel.registrarUsuario(
                     nombre = nombre,
                     email = email,
