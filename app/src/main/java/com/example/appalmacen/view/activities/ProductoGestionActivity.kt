@@ -7,6 +7,8 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import com.example.appalmacen.controller.SesionController
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
@@ -71,9 +73,13 @@ class ProductoGestionActivity : BaseActivity() {
         productoRepo = ProductoRepository(db.productoDAO(), db.interaccionDAO())
 
         productoId = intent.getIntExtra("PRODUCTO_ID", -1)
-        if (productoId != -1) {
+        val esAdmin = SesionController.usuarioActivo?.esAdmin ?: false
+
+        if (productoId != -1 && esAdmin) {
             cargarDatosProducto()
             binding.btnDeleteProd.visibility = View.VISIBLE
+        } else if (productoId != -1) {
+            cargarDatosProducto()
         }
 
         binding.btnPickProdImage.text = "HACER FOTO CON CÁMARA"
@@ -97,6 +103,7 @@ class ProductoGestionActivity : BaseActivity() {
                 binding.etProdNombre.setText(it.nombre)
                 binding.etProdStock.setText(it.cantidad.toString())
                 binding.etProdStockMin.setText(it.cantidadMinima.toString())
+                binding.swProdHabilitado.isChecked = it.habilitado
                 it.imagen?.let { uriStr ->
                     fotoUri = Uri.parse(uriStr)
                     Glide.with(this@ProductoGestionActivity).load(fotoUri).centerCrop().into(binding.ivProdFoto)
@@ -109,6 +116,7 @@ class ProductoGestionActivity : BaseActivity() {
         val nombre = binding.etProdNombre.text.toString()
         val stock = binding.etProdStock.text.toString().toIntOrNull() ?: 0
         val stockMin = binding.etProdStockMin.text.toString().toIntOrNull() ?: 0
+        val habilitado = binding.swProdHabilitado.isChecked
 
         if (nombre.isEmpty()) {
             Toast.makeText(this, "El nombre es obligatorio", Toast.LENGTH_SHORT).show()
@@ -129,6 +137,7 @@ class ProductoGestionActivity : BaseActivity() {
                     imagen = fotoUri?.toString(),
                     cantidad = stock,
                     cantidadMinima = stockMin,
+                    habilitado = habilitado,
                     fechaUltimaInteraccion = System.currentTimeMillis()
                 )
                 productoRepo.insert(nuevo)
@@ -140,7 +149,8 @@ class ProductoGestionActivity : BaseActivity() {
                         nombre = nombre,
                         imagen = fotoUri?.toString(),
                         cantidad = stock,
-                        cantidadMinima = stockMin
+                        cantidadMinima = stockMin,
+                        habilitado = habilitado
                     )
                     productoRepo.update(actualizado)
                     Toast.makeText(this@ProductoGestionActivity, "Producto actualizado", Toast.LENGTH_SHORT).show()
@@ -151,13 +161,20 @@ class ProductoGestionActivity : BaseActivity() {
     }
 
     private fun eliminarProducto() {
-        lifecycleScope.launch {
-            val producto = productoRepo.getById(productoId)
-            producto?.let {
-                productoRepo.delete(it)
-                Toast.makeText(this@ProductoGestionActivity, "Producto eliminado", Toast.LENGTH_SHORT).show()
-                finish()
+        AlertDialog.Builder(this)
+            .setTitle("Eliminar Producto")
+            .setMessage("¿Estás seguro de que deseas eliminar permanentemente este producto y todo su historial?")
+            .setPositiveButton("ELIMINAR") { _, _ ->
+                lifecycleScope.launch {
+                    val producto = productoRepo.getById(productoId)
+                    producto?.let {
+                        productoRepo.delete(it)
+                        Toast.makeText(this@ProductoGestionActivity, "Producto eliminado", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                }
             }
-        }
+            .setNegativeButton("CANCELAR", null)
+            .show()
     }
 }

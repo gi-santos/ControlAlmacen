@@ -9,7 +9,14 @@ class PreferencesManager(context: Context) {
     companion object {
         private const val KEY_USER_ID = "user_id"
         private const val KEY_IS_LOGGED_IN = "is_logged_in"
+        private const val KEY_LOGOUT_TIMEOUT = "logout_timeout"
     }
+
+    fun saveLogoutTimeout(millis: Long) {
+        prefs.edit().putLong(KEY_LOGOUT_TIMEOUT, millis).apply()
+    }
+
+    fun getLogoutTimeout(): Long = prefs.getLong(KEY_LOGOUT_TIMEOUT, 10 * 60 * 1000)
 
     fun saveUserSession(userId: Int) {
         prefs.edit().apply {

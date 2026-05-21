@@ -11,99 +11,89 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvTitulo"
+            android:id="@+id/tvTituloAlbaran"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="24dp"
-            android:text="Gestión de Producto"
+            android:text="Gestión de Albarán"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/ivProdFoto"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:id="@+id/ivAlbaranFoto"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_gravity="center"
-            android:scaleType="centerCrop"
+            android:scaleType="centerInside"
             android:src="@android:drawable/ic_menu_gallery"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:background="#EEEEEE"/>
 
         <Button
-            android:id="@+id/btnPickProdImage"
+            android:id="@+id/btnPickAlbaranImage"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="SELECCIONAR IMAGEN" />
+            android:text="HACER FOTO DEL ALBARÁN" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Nombre del Producto">
+            android:hint="CIF del Proveedor">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etProdNombre"
+                android:id="@+id/etAlbaranCif"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="12dp"
+            android:hint="Nombre del Proveedor">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAlbaranProveedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="0dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Importe Total (€)">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAlbaranImporte"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="8dp"
-                android:hint="Stock Inicial">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etProdStock"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:hint="Stock Mínimo">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etProdStockMin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/swProdHabilitado"
+            android:id="@+id/swAlbaranPagado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Producto Habilitado"
-            android:checked="true" />
+            android:text="Marcado como Pagado" />
 
         <Button
-            android:id="@+id/btnSaveProd"
+            android:id="@+id/btnSaveAlbaran"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:padding="12dp"
-            android:text="GUARDAR PRODUCTO"
+            android:text="GUARDAR ALBARÁN"
             android:backgroundTint="#4CAF50" />
 
         <Button
-            android:id="@+id/btnDeleteProd"
+            android:id="@+id/btnDeleteAlbaran"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="ELIMINAR PRODUCTO"
+            android:text="ELIMINAR ALBARÁN"
             android:backgroundTint="#F44336"
             android:visibility="gone" />
 

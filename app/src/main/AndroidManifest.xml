@@ -5,7 +5,6 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -58,6 +57,21 @@
             android:exported="false"
             android:label="Gestión de Usuarios" />
 
+        <activity
+            android:name=".view.activities.InventarioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.AlbaranesActivity"
+            android:exported="false"
+            android:label="Informe de Albaranes" />
+        <activity
+            android:name=".view.activities.AlbaranGestionActivity"
+            android:exported="false"
+            android:label="Gestión de Albarán" />
+        <activity
+            android:name=".view.activities.ConfiguracionActivity"
+            android:exported="false"
+            android:label="Configuración" />
         <activity
             android:name=".view.activities.ProductoGestionActivity"
             android:exported="false"

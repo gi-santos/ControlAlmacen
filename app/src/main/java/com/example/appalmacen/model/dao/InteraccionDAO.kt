@@ -14,9 +14,9 @@ interface InteraccionDAO {
     suspend fun insert(interaccion: Interaccion)
 
     @Query("""
-        SELECT p.* FROM productos p 
+        SELECT DISTINCT p.* FROM productos p 
         INNER JOIN interacciones i ON p.id = i.producto_id 
-        WHERE i.usuario_id = :usuarioId 
+        WHERE i.usuario_id = :usuarioId AND p.habilitado = 1
         ORDER BY i.fecha DESC 
         LIMIT 10
     """)

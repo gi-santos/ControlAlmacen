@@ -19,6 +19,8 @@ class ProductoRepository(
 
     suspend fun update(producto: Producto) = productoDAO.update(producto)
 
+    suspend fun setHabilitado(id: Int, habilitado: Boolean) = productoDAO.setHabilitado(id, habilitado)
+
     suspend fun delete(producto: Producto) {
         interaccionDAO.deleteByProducto(producto.id)
         productoDAO.delete(producto)

@@ -12,7 +12,8 @@ import com.example.appalmacen.model.entities.Producto
 class ProductoAdapter(
     private var productos: List<Producto>,
     private val onUpdateStock: (Producto, Int) -> Unit,
-    private val onClick: (Producto) -> Unit
+    private val onClick: (Producto) -> Unit,
+    private val onLongClick: (Producto) -> Unit = {}
 ) : RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder>() {
 
     inner class ProductoViewHolder(private val binding: ItemProductoBinding) :
@@ -46,6 +47,10 @@ class ProductoAdapter(
             }
 
             binding.root.setOnClickListener { onClick(producto) }
+            binding.root.setOnLongClickListener {
+                onLongClick(producto)
+                true
+            }
         }
     }
 

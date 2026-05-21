@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/group_libre">
+        <item
+            android:id="@+id/nav_inventario"
+            android:icon="@android:drawable/ic_dialog_dialer"
+            android:title="Inventario" />
+        <item
+            android:id="@+id/nav_albaranes"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="Albaranes" />
+    </group>
+
+    <item android:title="Administración">
+        <menu>
+            <group android:id="@+id/group_privada">
+                <item
+                    android:id="@+id/nav_gestion_usuarios"
+                    android:icon="@android:drawable/ic_menu_manage"
+                    android:title="Gestión de Usuarios" />
+                <item
+                    android:id="@+id/nav_configuracion"
+                    android:icon="@android:drawable/ic_menu_preferences"
+                    android:title="Configuración" />
+            </group>
+        </menu>
+    </item>
+
+</menu>

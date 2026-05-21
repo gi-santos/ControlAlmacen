@@ -1,6 +1,7 @@
 package com.example.appalmacen.view.activities
 
 import android.content.Intent
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
@@ -12,12 +13,17 @@ import com.example.appalmacen.utils.PreferencesManager
 //todas las pantallas que funcionen con timer tienen que heredar directamente de esta
 open class BaseActivity : AppCompatActivity() {
 
-    // 10 minutos en milisegundos
-    private val logoutTime: Long = 10 * 60 * 1000
     private val handler = Handler(Looper.getMainLooper())
+    private var logoutTime: Long = 10 * 60 * 1000
 
     private val logoutRunnable = Runnable {
         cerrarSesion()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val prefManager = PreferencesManager(this)
+        logoutTime = prefManager.getLogoutTimeout()
     }
 
     override fun onUserInteraction() {
