@@ -55,4 +55,13 @@ interface ProductoDAO {
     LIMIT 10
 """)
     fun getProductosRecientesPorUsuario(usuarioId: Int): Flow<List<Producto>>
+
+    @Query("SELECT * FROM productos ORDER BY habilitado DESC, nombre ASC")
+    fun getTodosLosProductos(): Flow<List<Producto>>  // sin suspend
+
+    @Query("SELECT * FROM productos WHERE habilitado = 1 ORDER BY nombre ASC")
+    fun getProductosActivos(): Flow<List<Producto>>
+
+    @Query("UPDATE productos SET habilitado = :activo WHERE id = :id")
+    suspend fun actualizarEstado(id: Int, activo: Boolean)
 }

@@ -21,12 +21,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inicializar controlador para poder cerrar sesión
+
         val usuarioRepo = UsuarioRepository(DatabaseHelper.getInstance(this).usuarioDAO())
         val prefManager = PreferencesManager(this)
         sesionController = SesionController(usuarioRepo, prefManager)
 
-        // Saludo personalizado si hay un usuario activo
         SesionController.usuarioActivo?.let {
             binding.tvWelcome.text = "¡Hola, ${it.nombre}!"
         }
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         // Botón de Cerrar Sesión
         binding.btnLogout.setOnClickListener {
             sesionController.logout()
-            // Ir al Login y limpiar el historial de pantallas
+
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)

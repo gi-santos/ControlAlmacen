@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F6F9"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Cabecera app -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_warehouse"
+                android:background="@drawable/bg_icon_header"
+                android:padding="6dp"
+                android:contentDescription="Logo" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AppAlmacen"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#1A1A2E" />
+
+                <!-- Badge de rol administrador -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ADMINISTRADOR"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/bg_badge_admin"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:layout_marginTop="2dp" />
+
+            </LinearLayout>
+
+            <!-- Botón cerrar sesión -->
+            <LinearLayout
+                android:id="@+id/btnCerrarSesion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_btn_logout"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_logout"
+                    android:contentDescription="Cerrar sesión" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Salir"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="#E74C3C"
+                    android:layout_marginStart="4dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Buscador -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="1dp"
+            app:cardBackgroundColor="#FFFFFF"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_search"
+                    android:contentDescription="Buscar" />
+
+                <EditText
+                    android:id="@+id/etBuscarProducto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Buscar productos..."
+                    android:textColorHint="#BBBBBB"
+                    android:textSize="14sp"
+                    android:textColor="#1A1A2E"
+                    android:background="@null"
+                    android:paddingStart="8dp"
+                    android:inputType="text"
+                    android:imeOptions="actionSearch"
+                    android:singleLine="true" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNuevoProducto"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="8dp"
+            android:text="@string/new_product"
+            android:textColor="#2ECC71"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:icon="@android:drawable/ic_input_add"
+            app:iconTint="#2ECC71"
+            app:rippleColor="#E8F5E9" />
+
+        <!-- Encabezado lista de productos con toggle de filtro -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp">
+
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Lista de Productos"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#1A1A2E" />
+
+            <!-- Toggle mostrar solo activos / todos -->
+            <LinearLayout
+                android:id="@+id/btnToggleFiltro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_toggle_filtro"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:clickable="true"
+                android:focusable="true">
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Lista de productos -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="#FFFFFF"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvProductos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+
+                <!-- Estado vacío (visible cuando no hay resultados) -->
+                <LinearLayout
+                    android:id="@+id/layoutVacio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="24dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_warehouse"
+                        android:alpha="0.3"
+                        android:contentDescription="Sin resultados" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sin productos encontrados"
+                        android:textSize="14sp"
+                        android:textColor="#BBBBBB"
+                        android:layout_marginTop="8dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Botón: Ver usuarios registrados -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="#1A1A2E"
+            android:layout_marginBottom="12dp">
+
+        <LinearLayout
+            android:id="@+id/btnVerUsuarios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/bg_icon_usuarios">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/ic_group"
+                android:contentDescription="Usuarios" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Usuarios Registrados"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/tvContadorUsuarios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ver todos los usuarios del sistema"
+                android:textSize="12sp"
+                android:textColor="#AAAACC"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_arrow_forward"
+            android:contentDescription="Ir a usuarios"
+            android:alpha="0.7" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+
+    <!-- Pie -->
+<LinearLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:layout_gravity="center_horizontal"
+android:layout_marginTop="4dp">
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="¿No encuentras el producto? "
+    android:textSize="13sp"
+    android:textColor="#888888" />
+
+<TextView
+    android:id="@+id/tvContactarAdmin"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Contacta al administrador"
+    android:textSize="13sp"
+    android:textStyle="bold"
+    android:textColor="#2ECC71"
+    android:padding="2dp" />
+
+</LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>

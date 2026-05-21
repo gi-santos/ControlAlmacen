@@ -2,6 +2,7 @@ package com.example.appalmacen.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -31,19 +32,19 @@ class ProductoAdapter(
         val producto = getItem(position)
 
         with(holder.binding) {
-            // Asignación de textos
             tvNombreProducto.text = producto.nombre
             tvCantidad.text = producto.cantidad.toString()
             tvSkuProducto.text = "Mínimo: ${producto.cantidadMinima}"
 
+            // --- IMAGEN ---
             if (!producto.imagen.isNullOrEmpty()) {
                 val file = File(producto.imagen!!)
                 if (file.exists()) {
                     ivProducto.load(file) {
                         crossfade(true)
-                        placeholder(R.drawable.ic_warehouse) // Icono mientras carga
-                        error(R.drawable.ic_warehouse)       // Icono si falla
-                        transformations(RoundedCornersTransformation(12f)) // Esquinas redondeadas
+                        placeholder(R.drawable.ic_warehouse)
+                        error(R.drawable.ic_warehouse)
+                        transformations(RoundedCornersTransformation(12f))
                     }
                 } else {
                     ivProducto.setImageResource(R.drawable.ic_warehouse)
@@ -53,13 +54,25 @@ class ProductoAdapter(
             }
 
             // --- ESTADO VISUAL (ACTIVO/INACTIVO) ---
-            // Nota: He usado 'habilitado', asegúrate de que tu entidad Producto tenga este campo.
             val backgroundRes = if (producto.habilitado) {
                 R.drawable.bg_item_producto_activo
             } else {
                 R.drawable.bg_item_producto
             }
             layoutItem.setBackgroundResource(backgroundRes)
+
+            // --- ALERTA DE CANTIDAD MÍNIMA ---
+            val esCritico = producto.cantidad <= producto.cantidadMinima
+
+            tvCantidad.setTextColor(
+                ContextCompat.getColor(
+                    root.context,
+                    if (esCritico) R.color.cantidad_critica else R.color.cantidad_normal
+                )
+            )
+            tvCantidad.setBackgroundResource(
+                if (esCritico) R.drawable.bg_cantidad_critica else 0
+            )
 
             // --- LISTENERS ---
             btnMas.setOnClickListener { onSumar(producto) }

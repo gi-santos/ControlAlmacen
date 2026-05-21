@@ -8,5 +8,10 @@
     <string name="cantidad">Cantidad</string>
     <string name="cancelar_producto">Cancelar</string>
     <string name="guardar_producto">Guardar Producto</string>
-    <string name="new_user">Nuevo Usuario</string>
+    <string name="new_product">Añadir Producto</string>
+    <string name="new_user">Añadir Usuario</string>
+    <string name="logo">Logo</string>
+    <string name="appalmacen">AppAlmacen</string>
+    <string name="cerrar_sesi_n">Cerrar sesión</string>
+    <string name="salir">Salir</string>
 </resources>

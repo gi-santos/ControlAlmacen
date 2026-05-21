@@ -17,8 +17,6 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Podrías poner un layout con un logo aquí si quieres
-        // setContentView(R.layout.activity_splash)
 
         val db = DatabaseHelper.getInstance(this)
         val usuarioRepo = UsuarioRepository(db.usuarioDAO())
@@ -26,13 +24,9 @@ class SplashActivity : AppCompatActivity() {
         val sesionController = SesionController(usuarioRepo, prefManager)
 
         lifecycleScope.launch {
-            // 1. Crear usuario por defecto si la base de datos está vacía
             crearUsuarioAdminSiNoExiste(usuarioRepo)
-
-            // 2. Pequeña pausa para que se vea el logo (opcional)
             delay(1500)
 
-            // 3. Decidir a qué pantalla ir
             if (sesionController.restaurarSesion()) {
                 startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             } else {

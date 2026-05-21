@@ -2,8 +2,8 @@ package com.example.appalmacen.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -14,9 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appalmacen.databinding.ActivitySelectProductBinding
 import com.example.appalmacen.data.database.DatabaseHelper
 import com.example.appalmacen.data.repository.ProductoRepository
-import com.example.appalmacen.utils.PreferencesManager
 import com.example.appalmacen.ui.adapters.ProductoAdapter
-import com.example.appalmacen.ui.adapters.RecientesAdapter
 import com.example.appalmacen.viewmodel.producto.ProductoViewModel
 import com.example.appalmacen.viewmodel.producto.ProductoViewModelFactory
 import kotlinx.coroutines.launch
@@ -25,7 +23,6 @@ class SelectProductActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySelectProductBinding
     private lateinit var adapter: ProductoAdapter
-
     private lateinit var recientesAdapter: ProductoAdapter
 
     private val usuarioId: Int by lazy {
@@ -47,6 +44,7 @@ class SelectProductActivity : AppCompatActivity() {
         configurarRecyclerView()
         configurarBuscador()
         configurarCerrarSesion()
+        configurarExpandible() // <-- Nueva función añadida
         observarProductos()
     }
 
@@ -70,9 +68,8 @@ class SelectProductActivity : AppCompatActivity() {
             isNestedScrollingEnabled = false
         }
         binding.rvRecientes.apply {
-            layoutManager = LinearLayoutManager(this@SelectProductActivity, LinearLayoutManager.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(this@SelectProductActivity, LinearLayoutManager.VERTICAL, false)
             adapter = recientesAdapter
-            // Esto quita el error "No adapter attached"
         }
     }
 
@@ -82,22 +79,37 @@ class SelectProductActivity : AppCompatActivity() {
         }
     }
 
+
+    private fun configurarExpandible() {
+
+        binding.layoutCabeceraProductos.setOnClickListener {
+            val estaOculto = binding.cardListaProductos.visibility == View.GONE
+
+            if (estaOculto) {
+                binding.cardListaProductos.visibility = View.VISIBLE
+                binding.ivFlechaExpandir.animate().rotation(180f).setDuration(200).start()
+            } else {
+                binding.cardListaProductos.visibility = View.GONE
+                binding.ivFlechaExpandir.animate().rotation(0f).setDuration(200).start()
+            }
+        }
+    }
+
     private fun observarProductos() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                // Flujo de la lista completa
                 launch {
                     viewModel.productos.collect { lista ->
                         adapter.submitList(lista)
                     }
                 }
-
-
                 launch {
                     viewModel.productosRecientes.collect { listaRecientes ->
-                        recientesAdapter.submitList(listaRecientes)
-                        // Mostrar/Ocultar el título de "Vistos recientemente" si la lista está vacía
-                        binding.rvRecientes.isVisible = listaRecientes.isNotEmpty()
+                        val listaFiltradaYLimitada = listaRecientes
+                            .filter { producto -> producto.habilitado }
+                            .take(5)
+                        recientesAdapter.submitList(listaFiltradaYLimitada)
+                        binding.rvRecientes.isVisible = listaFiltradaYLimitada.isNotEmpty()
                     }
                 }
             }
@@ -106,20 +118,9 @@ class SelectProductActivity : AppCompatActivity() {
 
     private fun configurarCerrarSesion() {
         binding.btnCerrarSesion.setOnClickListener {
-            AlertDialog.Builder(this)
-                .setTitle("Cerrar sesión")
-                .setMessage("¿Quieres terminar la jornada?")
-                .setPositiveButton("Salir") { _, _ ->
-                    // Usamos tu clase en lugar de SharedPreferences manual
-                    val prefManager = PreferencesManager(this)
-                    prefManager.clearSession()
-
-                    val intent = Intent(this, SelectUserActivity::class.java)
-                    startActivity(intent)
-                    finishAffinity()
-                }
-                .setNegativeButton("Cancelar", null)
-                .show()
+            val intent = Intent(this, SelectUserActivity::class.java)
+            startActivity(intent)
+            finishAffinity()
         }
     }
 }

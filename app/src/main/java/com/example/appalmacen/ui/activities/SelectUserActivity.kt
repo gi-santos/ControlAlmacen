@@ -23,7 +23,6 @@ class SelectUserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySelectUserBinding
     private lateinit var usuarioRepository: UsuarioRepository
-
     private lateinit var sesionController: SesionController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,27 +30,17 @@ class SelectUserActivity : AppCompatActivity() {
         binding = ActivitySelectUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 1. Inicializar la base de datos y el Repositorio PRIMERO
         val db = DatabaseHelper.getInstance(this)
         usuarioRepository = UsuarioRepository(db.usuarioDAO())
 
-        // 2. Ahora que usuarioRepository TIENE valor, inicializamos el controlador
+
         val prefManager = PreferencesManager(this)
         sesionController = SesionController(usuarioRepository, prefManager)
 
-        // 3. Configurar la UI
+
         binding.rvUsuarios.layoutManager = GridLayoutManager(this, 3)
 
-        // 4. Configurar eventos de clics
-        binding.btnNuevoUsuario.setOnClickListener {
-            mostrarDialogoValidacionAdmin(NewUserActivity::class.java)
-        }
 
-        binding.tvContactarAdmin.setOnClickListener {
-            // Tu lógica de contacto
-        }
-
-        // 5. Cargar los datos (usa el repositorio, por eso va al final)
         cargarUsuarios()
 
 }
@@ -66,7 +55,7 @@ class SelectUserActivity : AppCompatActivity() {
             setPadding(60, 40, 60, 10)
         }
 
-        val inputEmail = EditText(this).apply { hint = "Email de Admin" }
+        val inputEmail = EditText(this).apply { hint = "Usuario de Admin" }
         val inputPass = EditText(this).apply {
             hint = "Contraseña"
             inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
@@ -94,7 +83,7 @@ class SelectUserActivity : AppCompatActivity() {
 
     private fun validarYEntrar(email: String, pass: String, destino: Class<*>) {
         lifecycleScope.launch {
-            // Usamos la misma lógica que en tu LoginActivity
+
             val esValido = sesionController.login(email, pass)
 
             if (esValido) {
@@ -113,7 +102,7 @@ class SelectUserActivity : AppCompatActivity() {
                 val adapter = UsuarioSelectorAdapter(usuarios) { usuarioSeleccionado ->
 
                     if (usuarioSeleccionado.esAdmin) {
-                        mostrarDialogoValidacionAdmin(NewProductActivity::class.java)
+                        mostrarDialogoValidacionAdmin(AdminProductosActivity::class.java)
                     } else {
                         // Si NO es admin, creamos el Intent explícitamente
                         val intentProduct = Intent(this@SelectUserActivity, SelectProductActivity::class.java)

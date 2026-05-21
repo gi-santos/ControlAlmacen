@@ -12,6 +12,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Cabecera app -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,18 +26,40 @@
                 android:src="@drawable/ic_warehouse"
                 android:background="@drawable/bg_icon_header"
                 android:padding="6dp"
-                android:contentDescription="@string/logo" />
+                android:contentDescription="Logo" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/appalmacen"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                android:textColor="#1A1A2E"
-                android:layout_marginStart="10dp" />
+                android:orientation="vertical"
+                android:layout_marginStart="10dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AppAlmacen"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#1A1A2E" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ADMINISTRADOR"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/bg_badge_admin"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:layout_marginTop="2dp" />
+
+            </LinearLayout>
+
+            <!-- Botón cerrar sesión -->
             <LinearLayout
                 android:id="@+id/btnCerrarSesion"
                 android:layout_width="wrap_content"
@@ -53,12 +76,12 @@
                     android:layout_width="14dp"
                     android:layout_height="14dp"
                     android:src="@drawable/ic_logout"
-                    android:contentDescription="@string/cerrar_sesi_n" />
+                    android:contentDescription="Cerrar sesión" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/salir"
+                    android:text="Salir"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:textColor="#E74C3C"
@@ -68,6 +91,20 @@
 
         </LinearLayout>
 
+        <!-- Botón volver a productos -->
+        <LinearLayout
+            android:id="@+id/btnVolverProductos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:focusable="true">
+
+        </LinearLayout>
+
+        <!-- Buscador de usuarios -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,6 +112,7 @@
             app:cardElevation="1dp"
             app:cardBackgroundColor="#FFFFFF"
             android:layout_marginBottom="16dp">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,11 +131,11 @@
                     android:contentDescription="Buscar" />
 
                 <EditText
-                    android:id="@+id/etBuscarProducto"
+                    android:id="@+id/etBuscarUsuario"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="Buscar productos..."
+                    android:hint="Buscar usuarios..."
                     android:textColorHint="#BBBBBB"
                     android:textSize="14sp"
                     android:textColor="#1A1A2E"
@@ -110,72 +148,57 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNuevoUsuario"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Vistos recientemente"
-            android:textSize="15sp"
+            android:layout_gravity="end"
+            android:layout_marginBottom="8dp"
+            android:text="@string/new_user"
+            android:textColor="#2ECC71"
+            android:textSize="12sp"
             android:textStyle="bold"
-            android:textColor="#1A1A2E"
-            android:layout_marginBottom="10dp" />
+            app:icon="@android:drawable/ic_input_add"
+            app:iconTint="#2ECC71"
+            app:rippleColor="#E8F5E9" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvRecientes"
-            android:layout_width="match_parent"
-            android:layout_height="251dp"
-            android:layout_marginBottom="16dp"
-            android:nestedScrollingEnabled="false"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
+        <!-- Encabezado lista de usuarios con contador -->
         <LinearLayout
-            android:id="@+id/layoutCabeceraProductos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_marginBottom="10dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Lista de Productos"
+                android:text="Usuarios Registrados"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="#1A1A2E" />
 
             <TextView
-                android:id="@+id/tvFiltroActivos"
+                android:id="@+id/tvTotalUsuarios"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SOLO ACTIVOS"
+                android:text="0 usuarios"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:textColor="#2ECC71"
-                android:layout_marginEnd="10dp"
+                android:textColor="#7F8C8D"
                 android:padding="2dp" />
-
-            <ImageView
-                android:id="@+id/ivFlechaExpandir"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@android:drawable/arrow_down_float"
-                android:contentDescription="Expandir o colapsar lista" />
 
         </LinearLayout>
 
+        <!-- Lista de usuarios -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardListaProductos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="12dp"
             app:cardElevation="2dp"
             app:cardBackgroundColor="#FFFFFF"
-            android:visibility="gone"
             android:layout_marginBottom="12dp">
 
             <LinearLayout
@@ -185,14 +208,42 @@
                 android:padding="16dp">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvProductos"
+                    android:id="@+id/rvUsuarios"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false" />
 
+                <!-- Estado vacío (visible cuando no hay resultados) -->
+                <LinearLayout
+                    android:id="@+id/layoutVacioUsuarios"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="24dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_group"
+                        android:alpha="0.3"
+                        android:contentDescription="Sin usuarios" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No se encontraron usuarios"
+                        android:textSize="14sp"
+                        android:textColor="#BBBBBB"
+                        android:layout_marginTop="8dp" />
+
+                </LinearLayout>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <!-- Pie -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -203,7 +254,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="¿No encuentras el producto? "
+                android:text="¿Problemas con un usuario? "
                 android:textSize="13sp"
                 android:textColor="#888888" />
 
@@ -211,7 +262,7 @@
                 android:id="@+id/tvContactarAdmin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contacta al administrador"
+                android:text="Gestionar permisos"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 android:textColor="#2ECC71"

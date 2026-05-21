@@ -2,4 +2,17 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="rol_admin">#E74C3C</color>
+    <color name="rol_usuario">#3498DB</color>
+    <color name="estado_activo">#2ECC71</color>
+    <color name="estado_inactivo">#95A5A6</color>
+    <color name="switch_thumb_color">#2ECC71</color>
+    <color name="switch_track_color">#BDC3C7</color>
+    <color name="cantidad_minima_bg">#FFEBEE</color>
+    <color name="cantidad_minima_texto">#C62828</color>
+
+    <color name="cantidad_critica">#C62828</color>
+    <color name="cantidad_normal">#212121</color>
+
+    <color name="cantidad_normal_texto">#212121</color>
 </resources>

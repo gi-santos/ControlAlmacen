@@ -1,5 +1,6 @@
 package com.example.appalmacen.data.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.appalmacen.model.entities.Usuario
 import com.example.appalmacen.data.database.Contract
@@ -34,4 +35,12 @@ interface UsuarioDAO {
 
     @Query("SELECT * FROM ${Contract.TABLE_USUARIOS} WHERE ${Contract.UsuarioColumns.ES_ADMIN} = 1 LIMIT 1")
     suspend fun getAdmins(): List<Usuario>
+
+    @Query("SELECT * FROM usuarios ORDER BY nombre ASC")
+    fun getTodosLosUsuarios():
+            Flow<List<Usuario>>
+
+    // Conteo total de usuarios (para mostrar en el botón de la pantalla de productos)
+    @Query("SELECT COUNT(*) FROM usuarios")
+    fun contarUsuarios(): Flow<Int>
 }

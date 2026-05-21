@@ -58,20 +58,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnNuevoUsuario"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginBottom="8dp"
-            android:text="@string/new_user"
-            android:textColor="#2ECC71"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:icon="@android:drawable/ic_input_add"
-            app:iconTint="#2ECC71"
-            app:rippleColor="#E8F5E9" />
 
         <!-- Card con la lista de usuarios -->
         <androidx.cardview.widget.CardView
@@ -97,32 +83,6 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
-        <!-- Pie -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="4dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="¿No encuentras tu usuario? "
-                android:textSize="13sp"
-                android:textColor="#888888" />
-
-            <TextView
-                android:id="@+id/tvContactarAdmin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Contacta al administrador"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:textColor="#2ECC71"
-                android:padding="2dp" />
-        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>
