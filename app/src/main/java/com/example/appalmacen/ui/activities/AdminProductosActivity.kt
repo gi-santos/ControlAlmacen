@@ -15,13 +15,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.appalmacen.BaseActivity
 import com.example.appalmacen.R
 import com.example.appalmacen.ui.adapters.AdminProductosAdapter
 import com.example.appalmacen.viewmodel.admin.AdminViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class AdminProductosActivity : AppCompatActivity() {
+class AdminProductosActivity : BaseActivity() {
 
     private val viewModel: AdminViewModel by viewModels()
 
@@ -32,8 +33,7 @@ class AdminProductosActivity : AppCompatActivity() {
     private lateinit var btnNuevoProducto: com.google.android.material.button.MaterialButton
     private lateinit var layoutVacio: LinearLayout
 
-    // El adapter mantiene su comportamiento: cuando se pulsa el switch en la lista,
-    // se notifica al ViewModel para cambiar el estado (true/false) en la Base de Datos.
+
     private val adapter = AdminProductosAdapter { producto, nuevoEstado ->
         viewModel.cambiarEstadoProducto(producto, nuevoEstado)
     }
@@ -42,7 +42,7 @@ class AdminProductosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_productos)
 
-        // Inicializar vistas primero para evitar cualquier UninitializedPropertyAccessException
+
         initViews()
         setupRecyclerView()
         setupBuscador()
@@ -106,7 +106,7 @@ class AdminProductosActivity : AppCompatActivity() {
             }
         }
 
-        // Contador de usuarios en la tarjeta inferior
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.totalUsuarios.collectLatest { total ->

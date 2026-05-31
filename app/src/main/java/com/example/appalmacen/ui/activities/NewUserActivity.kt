@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.example.appalmacen.BaseActivity
 import com.example.appalmacen.databinding.ActivityNewUserBinding
 import com.example.appalmacen.databinding.BottomSheetCamaraBinding
 import com.example.appalmacen.data.database.DatabaseHelper
@@ -18,7 +19,7 @@ import com.example.appalmacen.viewmodel.UsuarioViewModel
 import com.example.appalmacen.viewmodel.usuario.RegisterViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class NewUserActivity : AppCompatActivity() {
+class NewUserActivity : BaseActivity() {
 
     private lateinit var binding: ActivityNewUserBinding
     private lateinit var viewModel: UsuarioViewModel
@@ -35,7 +36,7 @@ class NewUserActivity : AppCompatActivity() {
         binding = ActivityNewUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inicialización de base de datos y ViewModel
+
         val db         = DatabaseHelper.getInstance(this)
         val repository = UsuarioRepository(db.usuarioDAO())
         val factory    = RegisterViewModelFactory(repository)
@@ -85,14 +86,14 @@ class NewUserActivity : AppCompatActivity() {
     }
 
     private fun configurarListeners() {
-        // Botón Cancelar
+
         binding.btnCancelarUsuario.setOnClickListener { finish() }
 
-        // Cámara
+
         binding.flUsuarioPreview.setOnClickListener { solicitarPermisoCamara() }
         binding.btnAbrirCamaraUsuario.setOnClickListener { solicitarPermisoCamara() }
 
-        // Botón Guardar con lógica por defecto
+
         binding.btnGuardarUsuario.setOnClickListener {
             val nombre = binding.etNombreUsuario.text.toString().trim()
             val email = binding.etEmail.text.toString().trim()
@@ -123,7 +124,6 @@ class NewUserActivity : AppCompatActivity() {
         }
     }
 
-    // --- Gestión de Cámara (BottomSheet) ---
 
     private fun solicitarPermisoCamara() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)

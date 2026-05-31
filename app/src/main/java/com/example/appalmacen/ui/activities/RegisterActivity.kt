@@ -78,8 +78,6 @@ class RegisterActivity : AppCompatActivity() {
                 // --- CAMBIO AQUÍ: Navegar a SelectUserActivity ---
                 val intent = Intent(this@RegisterActivity, SelectUserActivity::class.java)
                 startActivity(intent)
-
-                // Opcional: cerramos la pantalla de registro para que no pueda volver atrás con el botón físico
                 finish()
 
             } catch (e: Exception) {

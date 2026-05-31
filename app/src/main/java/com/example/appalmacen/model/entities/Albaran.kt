@@ -9,8 +9,13 @@ import com.example.appalmacen.data.database.Contract
 data class Albaran(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = Contract.AlbaranColumns.ID)
-    val id: Int = 0, // Room usará 0 para indicar que debe generar uno nuevo
+    val id: Int = 0,
 
     @ColumnInfo(name = Contract.AlbaranColumns.IMAGEN_PATH)
-    val imagenPath: String?
+    val rutaPdf: String,
+
+    @ColumnInfo(name = Contract.AlbaranColumns.FECHA_GUARDADO)
+    val fechaGuardado: String
+
+
 )

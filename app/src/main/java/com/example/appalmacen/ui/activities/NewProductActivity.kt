@@ -16,15 +16,16 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.appalmacen.BaseActivity
 import com.example.appalmacen.databinding.ActivityNewProductBinding
 import com.example.appalmacen.databinding.BottomSheetCamaraBinding
-import com.example.appalmacen.model.AlmacenApp
+import com.example.appalmacen.AlmacenApp
 import com.example.appalmacen.viewmodel.producto.ProductoViewModel
 import com.example.appalmacen.viewmodel.producto.ProductoViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
 
-class NewProductActivity : AppCompatActivity() {
+class NewProductActivity : BaseActivity() {
 
     private lateinit var binding: ActivityNewProductBinding
     private var bottomSheetDialog: BottomSheetDialog? = null
@@ -36,7 +37,6 @@ class NewProductActivity : AppCompatActivity() {
         ProductoViewModelFactory(app.productoRepository, usuarioId = -1)
     }
 
-    // Gestiona la respuesta del permiso de cámara
     private val cameraPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             if (granted) abrirBottomSheetCamara()
@@ -54,7 +54,7 @@ class NewProductActivity : AppCompatActivity() {
     }
 
     private fun observarEventos() {
-        // Eventos de guardado (Flow)
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.eventos.collect {
@@ -65,7 +65,7 @@ class NewProductActivity : AppCompatActivity() {
             }
         }
 
-        // Observar la foto (Asegúrate de que ProductoViewModel tenga el LiveData 'fotoPath')
+
         viewModel.fotoPath.observe(this) { path ->
             if (path != null) {
                 val bitmap = BitmapFactory.decodeFile(path)
@@ -82,7 +82,6 @@ class NewProductActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        // Clic en el recuadro o en el botón para abrir cámara
         binding.flImagePreview.setOnClickListener { solicitarPermisoCamara() }
         binding.btnAbrirCamara.setOnClickListener { solicitarPermisoCamara() }
 
@@ -93,7 +92,6 @@ class NewProductActivity : AppCompatActivity() {
         }
     }
 
-    // --- Gestión de Cámara ---
 
     private fun solicitarPermisoCamara() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
@@ -114,7 +112,6 @@ class NewProductActivity : AppCompatActivity() {
             setCancelable(false)
         }
 
-        // Inicia el flujo de CameraX definido en tu ViewModel
         viewModel.iniciarCamara(this, this, sheetBinding.previewView)
 
         sheetBinding.btnCapturar.setOnClickListener {
@@ -130,7 +127,7 @@ class NewProductActivity : AppCompatActivity() {
         bottomSheetDialog?.show()
     }
 
-    // --- Lógica de Negocio ---
+
 
     private fun setupDropdownMenu() {
         val opcionesEstado = arrayOf("Activo", "Inactivo", "Agotado")

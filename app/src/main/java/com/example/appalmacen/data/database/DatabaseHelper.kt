@@ -19,7 +19,7 @@ import com.example.appalmacen.model.entities.*
         Perfil::class,
         UsuarioProductoInteraccion::class
     ],
-    version = 5,
+    version = 7,
     exportSchema = false
 )
 abstract class DatabaseHelper : RoomDatabase() {

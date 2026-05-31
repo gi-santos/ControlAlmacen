@@ -36,6 +36,8 @@ object Contract {
     object AlbaranColumns {
         const val ID = "id"
         const val IMAGEN_PATH = "imagen_path"
+
+        const val FECHA_GUARDADO = "fecha_guardado"
     }
 
     // Columnas Perfil

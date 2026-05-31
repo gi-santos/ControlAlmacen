@@ -22,12 +22,12 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inicializar controlador
+
         val usuarioRepo = UsuarioRepository(DatabaseHelper.getInstance(this).usuarioDAO())
         val prefManager = PreferencesManager(this)
         sesionController = SesionController(usuarioRepo, prefManager)
 
-        // Configurar botón Login
+
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // Configurar enlace a Registro
+
         binding.tvGoToRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val exito = sesionController.login(email, password)
             if (exito) {
-                // Ir a la pantalla principal
+
                 val intent = Intent(this@LoginActivity, SelectUserActivity::class.java)
                 startActivity(intent)
                 finish()

@@ -15,25 +15,24 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.appalmacen.BaseActivity
 import com.example.appalmacen.R
 import com.example.appalmacen.ui.adapters.AdminUsuariosAdapter
 import com.example.appalmacen.viewmodel.admin.AdminViewModel
 import kotlinx.coroutines.launch
 
-class AdminUsuariosActivity : AppCompatActivity() {
+class AdminUsuariosActivity : BaseActivity() {
 
     private val viewModel: AdminViewModel by viewModels()
 
-    // Vistas de la interfaz
     private lateinit var rvUsuarios: RecyclerView
     private lateinit var etBuscar: EditText
     private lateinit var tvTotalUsuarios: TextView
-    private lateinit var btnVolver: LinearLayout
+
     private lateinit var btnCerrarSesion: LinearLayout
     private lateinit var btnNuevoUsuario: com.google.android.material.button.MaterialButton
     private lateinit var layoutVacioUsuarios: LinearLayout
 
-    // MODIFICACIÓN: Pasamos la lambda al adapter igual que hiciste en productos
     private val adapter = AdminUsuariosAdapter { usuario, nuevoEstado ->
         viewModel.cambiarEstadoUsuario(usuario, nuevoEstado)
     }
@@ -42,7 +41,7 @@ class AdminUsuariosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_usuarios)
 
-        // El orden correcto para evitar NullPointerException
+
         initViews()
         collectFlows()
         setupRecyclerView()

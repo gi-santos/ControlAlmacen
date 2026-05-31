@@ -14,12 +14,14 @@ interface AlbaranDAO {
     @Query("SELECT * FROM ${Contract.TABLE_ALBARANES} WHERE ${Contract.AlbaranColumns.ID} = :id")
     suspend fun getById(id: Int): Albaran?
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE) // Añade estrategia de conflicto
-    suspend fun insert(albaran: Albaran): Long
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertarAlbaran(albaran: Albaran): Long
 
     @Update
-    suspend fun update(albaran: Albaran): Int // Es buena práctica devolver Int (filas afectadas)
+    suspend fun update(albaran: Albaran): Int
 
     @Delete
     suspend fun delete(albaran: Albaran): Int
+
+
 }

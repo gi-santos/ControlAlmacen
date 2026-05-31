@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ProductoDAO {
 
-    @Query("SELECT * FROM ${Contract.TABLE_PRODUCTOS} WHERE ${Contract.ProductoColumns.HABILITADO} = 1")
+    @Query("SELECT * FROM ${Contract.TABLE_PRODUCTOS} WHERE ${Contract.ProductoColumns.HABILITADO} = 1 ORDER BY ${Contract.ProductoColumns.NOMBRE} ASC")
     fun getHabilitados(): Flow<List<Producto>>
 
     @Query("SELECT * FROM ${Contract.TABLE_PRODUCTOS}")

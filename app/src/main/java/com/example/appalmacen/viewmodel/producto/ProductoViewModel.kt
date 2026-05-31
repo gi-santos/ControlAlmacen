@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
 import com.example.appalmacen.model.entities.Producto
 import com.example.appalmacen.data.repository.ProductoRepository
+import com.example.appalmacen.model.entities.Albaran
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
@@ -33,14 +34,14 @@ class ProductoViewModel(
     private val _query = MutableStateFlow("")
 
     val productos: StateFlow<List<Producto>> = _query
-        .debounce(300L)
+        .debounce { query -> if (query.isBlank()) 0L else 300L }
         .flatMapLatest { query ->
             if (query.isBlank()) repository.getHabilitados()
             else repository.buscar(query)
         }
         .stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
+            started = SharingStarted.Eagerly,
             initialValue = emptyList()
         )
 
@@ -95,7 +96,63 @@ class ProductoViewModel(
         )
     }
 
-    // --- Lógica de Negocio ---
+    // Agrega esto dentro de tu ProductoViewModel
+    fun guardarFotoComoPdf(
+        context: android.content.Context,
+        fotoFile: File,
+        onSuccess: () -> Unit,
+        onError: (Exception) -> Unit
+    ) {
+        viewModelScope.launch(kotlinx.coroutines.Dispatchers.IO) {
+            try {
+
+                val formatoFecha = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault())
+                val fechaGuardado = formatoFecha.format(java.util.Date())
+
+                val timeStamp = java.text.SimpleDateFormat("yyyyMMdd_HHmmss", java.util.Locale.getDefault()).format(java.util.Date())
+                val nombrePdf = "Albaran_$timeStamp.pdf"
+
+                // 2. Localizar directorio en los archivos de la tablet
+                val directorioDestino = context.getExternalFilesDir("AlbaranesPDF")
+                val archivoPdfDestino = File(directorioDestino, nombrePdf)
+
+
+                val bitmap = android.graphics.BitmapFactory.decodeFile(fotoFile.absolutePath)
+                val pdfDocument = android.graphics.pdf.PdfDocument()
+                val pageInfo = android.graphics.pdf.PdfDocument.PageInfo.Builder(bitmap.width, bitmap.height, 1).create()
+                val page = pdfDocument.startPage(pageInfo)
+
+                val canvas = page.canvas
+                canvas.drawBitmap(bitmap, 0f, 0f, null)
+                pdfDocument.finishPage(page)
+
+                java.io.FileOutputStream(archivoPdfDestino).use { outputStream ->
+                    pdfDocument.writeTo(outputStream)
+                }
+                pdfDocument.close()
+                bitmap.recycle()
+
+
+                val nuevoAlbaran = Albaran(
+                    rutaPdf = archivoPdfDestino.absolutePath,
+                    fechaGuardado = fechaGuardado
+                )
+                repository.insertarAlbaran(nuevoAlbaran)
+
+                // Borrar residuo temporal JPG
+                if (fotoFile.exists()) fotoFile.delete()
+
+                // De vuelta al hilo principal para UI
+                kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
+                    onSuccess()
+                }
+            } catch (e: Exception) {
+                kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
+                    onError(e)
+                }
+            }
+        }
+    }
 
     fun onQueryChanged(query: String) {
         _query.value = query
